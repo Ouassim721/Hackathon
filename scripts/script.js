@@ -1,3 +1,14 @@
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
 window.addEventListener('scroll', function() {
     const navbar = document.getElementById('navbar');
     const logo = document.getElementById('logo');
@@ -10,6 +21,7 @@ window.addEventListener('scroll', function() {
         logo.src = '/images/logo2.png'; // Original logo
     }
 });
+
 
 const toggleButton = document.querySelector('.navbar-toggler');
         const navbar = document.getElementById('navbar');
