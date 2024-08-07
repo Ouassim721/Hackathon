@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const ensureAdmin = require('../middleware/ensureAdmin');
 const eventController = require('../controllers/eventController');
-const { getEventDetails } = require('../controllers/eventController');
 
 // Route pour afficher la page des événements
 router.get('/', eventController.getEvents);
-router.get('/event-details/:id', getEventDetails);
+
+// Route pour afficher les détails d'un événement
+router.get('/event-details/:id', eventController.getEventDetails);
 
 // Route pour afficher le formulaire d'ajout d'événement (Admin uniquement)
 router.get('/admin/add-event', ensureAdmin, eventController.getAddEventForm);

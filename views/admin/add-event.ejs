@@ -114,12 +114,13 @@
 
                 <h3 class="mt-5">Événements Existants</h3>
                 <ul class="list-group">
-                    <!-- Loop through existing events and display them -->
+
                     <% events.forEach(event => { %>
                         <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
                             <%= event.titre %>
-                            <form action="/admin/delete-event/<%= event.id %>" method="POST" style="display:inline;">
-                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                            <form action="/admin/delete-event/<%= event.id %>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
                             </form>
                         </li>
                     <% }) %>

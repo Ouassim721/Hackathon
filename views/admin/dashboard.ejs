@@ -44,7 +44,11 @@
                         <% events.forEach(event => { %>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <%= event.titre %> - <%= new Date(event.date).toLocaleDateString() %>
-                                <a href="/admin/events/<%= event.id %>/delete" class="btn btn-danger btn-sm">Supprimer</a>
+                               <!-- Formulaire de suppression -->
+                    <form action="/admin/delete-event/<%= event.id %>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
                             </li>
                         <% }) %>
                     <% } else { %>
@@ -52,6 +56,7 @@
                     <% } %>
                 </ul>
             </main>
+            
         </div>
     </div>
     <script src="/public/bootstrap-5.3.3-dist/js/bootstrap.js"></script>

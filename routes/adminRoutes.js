@@ -1,8 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
-const fs = require('fs');
-const db = require('../config/db');
 const ensureAdmin = require('../middleware/ensureAdmin');
 const eventController = require('../controllers/eventController');
 
@@ -26,25 +23,6 @@ router.post('/add-event', ensureAdmin, eventController.upload.fields([
 ]), eventController.addEvent);
 
 // Route pour supprimer un événement
-router.post('/delete-event/:id', ensureAdmin, async (req, res) => {
-    const eventId = req.params.id;
-    try {
-        // Récupérer l'URL de l'image pour pouvoir la supprimer du dossier
-        const [event] = await db.query('SELECT imageURL FROM Evenements WHERE id = ?', [eventId]);
-        if (event.length > 0 && event[0].imageURL) {
-            const filePath = path.join(__dirname, '../public', event[0].imageURL);
-            if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath);
-            }
-        }
-
-        await db.query('DELETE FROM Evenements WHERE id = ?', [eventId]);
-        res.redirect('/admin/dashboard');
-    } catch (error) {
-        console.error('Erreur lors de la suppression de l\'événement:', error);
-        res.status(500).send('Erreur du serveur');
-    }
-});
-
+router.delete('/delete-event/:id', ensureAdmin, eventController.deleteEvent);
 
 module.exports = router;

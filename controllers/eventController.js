@@ -1,5 +1,6 @@
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 const db = require('../config/db');
 
 // Configuration de multer pour le téléchargement des fichiers
@@ -32,7 +33,6 @@ exports.getAddEventForm = async (req, res) => {
     try {
         // Récupère tous les événements existants
         const [events] = await db.query('SELECT * FROM evenements');
-        
         // Rendu de la vue avec la liste des événements
         res.render('admin/add-event', { events });
     } catch (err) {
@@ -78,7 +78,6 @@ exports.addEvent = async (req, res) => {
 };
 
 // Fonction pour obtenir les détails d'un événement spécifique
-// Exemple de fonction pour obtenir les détails d'un événement
 exports.getEventDetails = async (req, res) => {
     const eventId = req.params.id;
 
@@ -101,6 +100,28 @@ exports.getEventDetails = async (req, res) => {
         res.render('event/eventDetails/index', { event: event[0], sponsors, speakers, programmes, user });
     } catch (error) {
         console.error('Erreur lors de la récupération des détails de l\'événement:', error);
+        res.status(500).send('Erreur du serveur');
+    }
+};
+
+// Fonction pour supprimer un événement
+exports.deleteEvent = async (req, res) => {
+    const eventId = req.params.id;
+
+    try {
+        // Récupérer l'URL de l'image pour pouvoir la supprimer du dossier
+        const [event] = await db.query('SELECT imageUrl FROM evenements WHERE id = ?', [eventId]);
+        if (event.length > 0 && event[0].imageUrl) {
+            const filePath = path.join(__dirname, '../public', event[0].imageUrl);
+            if (fs.existsSync(filePath)) {
+                fs.unlinkSync(filePath);
+            }
+        }
+
+        await db.query('DELETE FROM evenements WHERE id = ?', [eventId]);
+        res.redirect('/admin/dashboard');
+    } catch (error) {
+        console.error('Erreur lors de la suppression de l\'événement:', error);
         res.status(500).send('Erreur du serveur');
     }
 };

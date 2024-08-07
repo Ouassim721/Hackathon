@@ -11,6 +11,8 @@ const passportConfig = require('./passport-config');
 const db = require('./config/db');
 
 const app = express();
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 
 // Configurer EJS comme moteur de template
 app.set('view engine', 'ejs');
