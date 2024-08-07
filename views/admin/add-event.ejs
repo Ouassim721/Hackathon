@@ -69,41 +69,45 @@
                                     <input type="file" class="form-control" id="image" name="image">
                                 </div>
                             </div>
-
-                            <!-- Sponsor Section -->
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-4">Ajouter des Sponsors</h5>
-                                    <div id="sponsorCards" class="row g-3">
-                                        <!-- Les cartes de sponsors seront ajoutées ici -->
+                                <!-- Sponsor Section -->
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-4">Ajouter des Sponsors</h5>
+                                        <div id="sponsorCards" class="row g-3">
+                                            <!-- Les cartes de sponsors seront ajoutées ici -->
+                                        </div>
+                                        <button type="button" id="addSponsor" class="btn btn-secondary">Ajouter un autre Sponsor (+)</button>
                                     </div>
-                                    <button type="button" id="addSponsor" class="btn btn-secondary">Ajouter un autre Sponsor (+)</button>
                                 </div>
-                            </div>
-
-                            <!-- Speaker Section -->
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-4">Ajouter des Speakers</h5>
-                                    <div id="speakerCards" class="row g-3">
-                                        <!-- Les cartes de speakers seront ajoutées ici -->
+                            
+                                <!-- Speaker Section -->
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-4">Ajouter des Speakers</h5>
+                                        <div id="speakerCards" class="row g-3">
+                                            <!-- Les cartes de speakers seront ajoutées ici -->
+                                        </div>
+                                        <button type="button" id="addSpeaker" class="btn btn-secondary">Ajouter un autre Speaker (+)</button>
                                     </div>
-                                    <button type="button" id="addSpeaker" class="btn btn-secondary">Ajouter un autre Speaker (+)</button>
                                 </div>
-                            </div>
-
-                            <!-- Program Section -->
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-4">Ajouter le Programme</h5>
-                                    <div id="programDaysContainer" class="row g-3">
-                                        <!-- Les cartes de jours seront ajoutées ici -->
+                            
+                                <!-- Program Section -->
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-4">Ajouter le Programme</h5>
+                                        <div id="programDaysContainer" class="row g-3">
+                                            <!-- Les cartes de jours seront ajoutées ici -->
+                                        </div>
+                                        <button type="button" id="addDay" class="btn btn-secondary">Ajouter un Jour (+)</button>
                                     </div>
-                                    <button type="button" id="addDay" class="btn btn-secondary">Ajouter un Jour (+)</button>
                                 </div>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Ajouter l'Événement</button>
+                            
+                                <!-- Champs cachés pour stocker les données dynamiques -->
+                                <input type="hidden" id="sponsorsData" name="sponsorsData">
+                                <input type="hidden" id="speakersData" name="speakersData">
+                                <input type="hidden" id="programDaysData" name="programDaysData">
+                            
+                                <button type="submit" class="btn btn-primary">Ajouter l'Événement</button>
                         </form>
                     </div>
                 </div>

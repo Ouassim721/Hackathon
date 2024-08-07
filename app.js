@@ -40,17 +40,6 @@ app.use(passport.session());
 // Middleware pour assurer l'accès admin
 app.use('/admin', ensureAdmin);
 
-// Configuration de Multer
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'public/images')); // Répertoire où les images seront sauvegardées
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Nom de fichier unique
-    }
-});
-const upload = multer({ storage: storage });
-
 // Routes pour les différentes parties de l'application
 const adminRoutes = require('./routes/adminRoutes');
 const userRoutes = require('./routes/userRoutes');

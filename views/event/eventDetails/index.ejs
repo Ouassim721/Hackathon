@@ -3,197 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/../images/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="/public/bootstrap-5.3.3-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/public/font-awesome/css/all.min.css">
-    <link rel="stylesheet" href="/public/styles.css">
-    <link rel="stylesheet" href="/public/event/eventDetails.css">
-    <title>Détails de l'événements</title>
+    <title>Détails de l'Événement</title>
+    <link rel="stylesheet" href="/path/to/your/styles.css">
 </head>
 <body>
-    <div class="layout-container">
-        <nav class="navbar navbar-expand-lg navbar-dark position-fixed" id="navbar" style="width: 100%; z-index: 999; top: 0;">
-            <div class="container-fluid">
-                <a class="navbar-brand d-flex justify-content-between align-items-center" href="#">
-                    <img id="logo" src="/images/logo2.png" alt="Logo du site" width="80" height="80" class="d-inline align-top mx-5">
-                    <!-- <h1 class="f">Al Moutmir</h1> -->
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/index">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/actualite">Actualité</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/events">Evenement</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/a-propos">A Propos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex flex-column flex-lg-row align-items-start" id="cnx-theme">
-                        <!-- <button type="button" class="btn btn-warning py-2 me-2 mb-2 mb-lg-0" id="navigateButton">Déconnexion</button>-->
-                        <% if (user) { %>
-                          <button type="button" class="btn btn-warning py-2 me-2 mb-2 mb-lg-0" id="logoutButton">Déconnexion</button>
-                      <% } else { %>
-                          <button type="button" class="btn btn-warning py-2 me-2 mb-2 mb-lg-0" id="loginButton">Connéxion</button>
-                      <% } %>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        
-    <!--------------------------------------FIN NAVBAR-------------------------------------------------------------------------------------------------------->
-    <!--------------------------------------CAROUSSEL-------------------------------------------------------------------------------------------------------->
-  <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active" style="height: 100vh;">
-        <div class="bd-placeholder-img" id="bg-1"></div>
-        <div class="container">
-        </div>
-      </div>
-      <div class="carousel-item" style="height: 100vh;">
-        <div class="bd-placeholder-img" id="bg-2"></div>
-        <div class="container">
-        </div>
-      </div>
-      <div class="carousel-item" style="height: 100vh;">
-        <div class="bd-placeholder-img" id="bg-3"></div>
-        <div class="container">
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-    <div class="carousel-caption text-start" style="margin-bottom: 150px;">
-        <h1 class="text-white">Bienvenue Dans <%= event.titre %></h1>
-      </div>
-  </div>
-    <!--------------------------------------FIN CAROUSSEL-------------------------------------------------------------------------------------------------------->
-    <div class="container mt-5">
-        <!-- Détails de l'événement -->
-        <div class="event-details">
-            <h1><%= event.titre %></h1>
-            <p><%= event.description %></p>
-            <p><strong>Date :</strong> <%= event.date %></p>
-            <p><strong>Lieu :</strong> <%= event.lieu %></p>
-            <% if (event.imageUrl) { %>
-                <img src="/images/<%= event.imageUrl %>" alt="<%= event.titre %>" class="img-fluid">
-            <% } %>
-        </div>
+    <h1><%= event.titre %></h1>
+    <p><%= event.description %></p>
+    <p>Date de début : <%= event.date_debut %></p>
+    <p>Date de fin : <%= event.date_fin %></p>
+    <p>Lieu : <%= event.lieu %></p>
 
-        <!-- Détails des sponsors -->
-      <!-- Sponsors -->
-<!-- Sponsors -->
-<% if (event.sponsors && Array.isArray(event.sponsors) && event.sponsors.length > 0) { %>
-    <div class="sponsors mt-5">
-        <h2>Sponsors</h2>
-        <ul class="list-unstyled">
-            <% event.sponsors.forEach(function(sponsor) { %>
-                <li class="mb-3">
-                    <h3><%= sponsor.nom %></h3>
-                    <p><%= sponsor.description %></p>
-                </li>
-            <% }) %>
-        </ul>
-    </div>
-<% } else { %>
-    <p>Aucun sponsor n'a été trouvé pour cet événement.</p>
-<% } %>
+    <h2>Sponsors</h2>
+    <ul>
+        <% sponsors.forEach(sponsor => { %>
+            <li><strong><%= sponsor.nom %></strong>: <%= sponsor.description %></li>
+        <% }) %>
+    </ul>
 
+    <h2>Speakers</h2>
+    <ul>
+        <% speakers.forEach(speaker => { %>
+            <li>
+                <strong><%= speaker.nom %> <%= speaker.prenom %></strong>: <%= speaker.description %>
+                <% if (speaker.image_url) { %>
+                    <img src="<%= speaker.image_url %>" alt="<%= speaker.nom %> <%= speaker.prenom %>" />
+                <% } %>
+            </li>
+        <% }) %>
+    </ul>
 
+    <h2>Programme</h2>
+    <ul>
+        <% programmes.forEach(programme => { %>
+            <li><strong>Date:</strong> <%= programme.titre %> - <%= programme.description %></li>
+        <% }) %>
+    </ul>
 
-        <!-- Détails des intervenants (speakers) -->
-        <% if (event.speakers && event.speakers.length > 0) { %>
-            <div class="speakers mt-5">
-                <h2>Intervenants</h2>
-                <div class="row">
-                    <% event.speakers.forEach(function(speaker) { %>
-                        <div class="col-md-4">
-                            <% if (speaker.imageUrl) { %>
-                                <img src="/images/<%= speaker.imageUrl %>" alt="<%= speaker.nom %> <%= speaker.prenom %>" class="img-fluid mb-3">
-                            <% } %>
-                            <h3><%= speaker.nom %> <%= speaker.prenom %></h3>
-                            <p><%= speaker.description %></p>
-                        </div>
-                    <% }) %>
-                </div>
-            </div>
+    <div class="d-flex flex-column flex-lg-row align-items-start" id="cnx-theme">
+        <% if (user) { %>
+            <button type="button" class="btn btn-warning py-2 me-2 mb-2 mb-lg-0" id="logoutButton">Déconnexion</button>
         <% } else { %>
-            <p>Aucun speaker n'a été trouvé pour cet événement.</p>
+            <button type="button" class="btn btn-warning py-2 me-2 mb-2 mb-lg-0" id="loginButton">Connexion</button>
         <% } %>
-        <!-- Programme de l'événement -->
-        <% if (event.programme && event.programme.length > 0) { %>
-            <div class="programme mt-5">
-                <h2>Programme</h2>
-                <ul>
-                    <% event.programme.forEach(function(item) { %>
-                        <li>
-                            <strong><%= item.jour %> :</strong> <%= item.description %>
-                        </li>
-                    <% }) %>
-                </ul>
-            </div>
-        <% } %>
-    </div>  
-</div>
-<!-- LA PARTIE FOOTER  -->
-
-    <footer>
-        <div class="footer-container">
-          <div class="footer-section">
-            <h3>À Propos</h3>
-            <p>Notre projet se concentre sur l'analyse précise des sols pour aider à une meilleure gestion des terres agricoles et environnementales.</p>
-          </div>
-          <div class="footer-section">
-            <h3>Contact</h3>
-            <p><b>Email:</b> youcode@gmail.com</p>
-            <p><b>Téléphone:</b> +212 12345678</p>
-            <p><b>Adresse:</b> YouCode Safi</p>
-          </div>
-          <div class="footer-section">
-            <h3>Suivez-nous</h3>
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2024 SAM. Tous droits réservés.</p>
-        </div>
-      </footer>
-  <!-- FIN DE LA PARTIE FOOTER -->
-  <script>
-       document.getElementById('logoutButton')?.addEventListener('click', () => {
-            window.location.href = '/inscription/logout';
-        });
-
-        document.getElementById('loginButton')?.addEventListener('click', () => {
-            window.location.href = '/inscription';
-        });
-    </script>
-  <script src="/public/bootstrap-5.3.3-dist/js/bootstrap.js"></script>
-<script src="/scripts/script.js"></script>
+    </div>
 </body>
 </html>
