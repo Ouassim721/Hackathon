@@ -12,7 +12,8 @@ body {
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
-	margin: -20px 0 50px;
+	margin: 0;
+	padding: 0;
 }
 
 h1 {
@@ -25,6 +26,7 @@ h1 {
     font-weight: bold;
 	margin: 0;
     color: #4f6d7a;
+
 }
 
 h2 {
@@ -57,6 +59,7 @@ button {
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
+	cursor: pointer;
 }
 
 button:active {
@@ -121,6 +124,7 @@ input {
 	padding: 12px 45px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
+	cursor: pointer;
 	/* transition: transform 80ms ease-in; */
 }
 

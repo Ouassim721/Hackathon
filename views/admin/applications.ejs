@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gérer les Applications</title>
+    <link rel="stylesheet" href="/public/bootstrap-5.3.3-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/public/dashboard.css">
+  </head>
+  <body>
+    <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Tableau de Bord Administrateur</a>
+    </header>
+    <div class="container-fluid">
+      <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse position-fixed" style="height: 100vh;">
+          <div class="position-sticky pt-3" style="height: 100%;">
+            <ul class="nav flex-column mt-3" style="height: 100%;">
+              <li class="nav-item py-2">
+                <a class="nav-link" href="/admin/dashboard">Tableau de board</a>
+              </li>
+              <li class="nav-item py-2">
+                <a class="nav-link" href="/admin/add-event">Gérer les Événements</a>
+              </li>
+              <li class="nav-item py-2">
+                <a class="nav-link" href="/admin/photos">Gérer les Photos</a>
+              </li>
+              <li class="nav-item py-2">
+                <a class="nav-link" href="/admin/applications">Gérer les Applications</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <h2>Gérer les Applications</h2>
+          <!-- Formulaire de gestion des applications -->
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nom du Candidat</th>
+                <th>Événement</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Exemple d'application -->
+              <tr>
+                <td>1</td>
+                <td>Jean Dupont</td>
+                <td>Événement 1</td>
+                <td><span class="badge bg-warning">En attente</span></td>
+                <td>
+                  <button class="btn btn-success btn-sm">Accepter</button>
+                  <button class="btn btn-danger btn-sm">Refuser</button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Marie Durand</td>
+                <td>Événement 2</td>
+                <td><span class="badge bg-success">Accepté</span></td>
+                <td>
+                  <button class="btn btn-danger btn-sm">Annuler</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </main>
+      </div>
+    </div>
+    <script src="/scripts/dashboard.js"></script>
+    <script src="bootstrap-5.3.3-dist/js/bootstrap.js"></script>
+  </body>
+</html>

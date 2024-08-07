@@ -8,15 +8,17 @@ const router = express.Router();
 
 // Render inscription page
 router.get('/', (req, res) => {
-    res.render('inscription', { error: null, message: null });
+    const error = req.flash('error')[0]; // Récupère le message d'erreur de la session
+    const message = req.flash('message')[0]; // Récupère un éventuel message de succès
+    res.render('inscription', { error, message });
 });
 
 // Sign-up Route
 router.post('/sign-up', [
-    check('email', 'Email is not valid').isEmail(),
-    check('password', 'Password must be at least 6 characters').isLength({ min: 6 })
-], async (req, res) => {
-    const { nom, prenom, tele, Adresse, profession, organisation, email, password } = req.body;
+    check('email', 'L\'adresse email n\'est pas valide').isEmail(),
+    check('password', 'Le mot de passe doit contenir au moins 6 caractères').isLength({ min: 6 })
+], async (req, res, next) => {
+    const { nom, prenom, email, password } = req.body;
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -24,16 +26,32 @@ router.post('/sign-up', [
     }
 
     try {
+        const [existingUser] = await db.query('SELECT * FROM Users WHERE email = ?', [email]);
+        if (existingUser.length > 0) {
+            return res.render('inscription', { error: 'Cet email est déjà utilisé', message: null });
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
-        await db.query(
-            'INSERT INTO users (nom, prenom, tele, Adresse, profession, organisation, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [nom, prenom, tele, Adresse, profession, organisation, email, hashedPassword]
+        const [result] = await db.query(
+            'INSERT INTO Users (nom, prenom, email, role, password) VALUES (?, ?, ?, ?, ?)',
+            [nom, prenom, email, 'candidat', hashedPassword] // 'candidat' est utilisé comme rôle par défaut
         );
 
-        res.redirect('/');
+        const newUser = {
+            id: result.insertId,
+            nom,
+            prenom,
+            email
+        };
+
+        req.login(newUser, function(err) {
+            if (err) { return next(err); }
+            req.flash('message', 'Inscription réussie. Bienvenue!');
+            return res.redirect('/');
+        });
     } catch (error) {
         console.error(error);
-        res.render('inscription', { error: 'An error occurred', message: null });
+        res.render('inscription', { error: 'Une erreur est survenue lors de l\'inscription', message: null });
     }
 });
 
@@ -42,7 +60,7 @@ router.post('/sign-in', (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/inscription',
-        failureFlash: true
+        failureFlash: 'Adresse email ou mot de passe incorrect.'
     })(req, res, next);
 });
 

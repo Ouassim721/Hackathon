@@ -1,60 +1,99 @@
 const express = require('express');
-const db = require('../config/db'); // Adjust the path as necessary
-const path = require('path');
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
+const db = require('../config/db'); // Assurez-vous que ce chemin est correct
 
-// Route for the events page
-router.get('/', async (req, res) => {
-    try {
-        const [results] = await db.query('SELECT * FROM events');
-        res.render('event/events', { events: results });
-    } catch (err) {
-        console.error('Error fetching events:', err);
-        res.status(500).send('Internal Server Error');
+// Configuration de multer pour le téléchargement des fichiers
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 });
+const upload = multer({ storage: storage });
 
-// Route to display event details
-router.get('/:id', async (req, res) => {
-    try {
-        const [result] = await db.query('SELECT * FROM events WHERE id = ?', [req.params.id]);
-        res.render('event/eventDetails/index', { event: result[0] });
-    } catch (err) {
-        console.error('Error fetching event details:', err);
-        res.status(500).send('Internal Server Error');
-    }
+// Route pour afficher le formulaire d'ajout d'événement
+router.get('/add-event', (req, res) => {
+    db.query('SELECT * FROM Evenements', (err, events) => {
+        if (err) throw err;
+        res.render('admin/add-event', { events });
+    });
 });
 
-// Route to render the application form
-router.get('/apply/:eventId', async (req, res) => {
-    try {
-        const [eventResult] = await db.query('SELECT * FROM events WHERE id = ?', [req.params.eventId]);
-        const [allEventsResult] = await db.query('SELECT * FROM events');
+// Route pour ajouter un événement
+router.post('/add-event', upload.single('image'), (req, res) => {
+    const { titre, description, date_debut, date_fin, lieu } = req.body;
+    const image = req.file ? req.file.filename : null;
 
-        res.render('event/apply', { 
-            event: eventResult[0], // Specific event details
-            events: allEventsResult // All events for the dropdown
-        });
-    } catch (err) {
-        console.error('Error fetching event or all events:', err);
-        res.status(500).send('Internal Server Error');
-    }
+    // Insertion de l'événement dans la base de données
+    db.query(
+        'INSERT INTO Evenements (titre, description, date_debut, date_fin, lieu) VALUES (?, ?, ?, ?, ?)',
+        [titre, description, date_debut, date_fin, lieu],
+        (err, results) => {
+            if (err) throw err;
+            res.redirect('/admin/add-event');
+        }
+    );
 });
 
-// Route to handle application form submission
-router.post('/apply/:eventId', async (req, res) => {
-    const { name, email, message } = req.body;
-    const eventId = req.params.eventId;
+// Route pour ajouter un sponsor
+router.post('/add-sponsor', (req, res) => {
+    const { nom, description } = req.body;
 
-    try {
-        await db.query('INSERT INTO applications (event_id, name, email, message) VALUES (?, ?, ?, ?)', 
-            [eventId, name, email, message]
-        );
-        res.redirect(`/events/${eventId}`);
-    } catch (err) {
-        console.error('Error submitting application:', err);
-        res.status(500).send('Internal Server Error');
-    }
+    // Insertion du sponsor dans la base de données
+    db.query(
+        'INSERT INTO Sponsors (nom, description) VALUES (?, ?)',
+        [nom, description],
+        (err, results) => {
+            if (err) throw err;
+            res.redirect('/admin/add-event');
+        }
+    );
+});
+
+// Route pour ajouter un speaker
+router.post('/add-speaker', upload.single('image_url'), (req, res) => {
+    const { nom, prenom, description } = req.body;
+    const image_url = req.file ? req.file.filename : null;
+
+    // Insertion du speaker dans la base de données
+    db.query(
+        'INSERT INTO Speakers (nom, prenom, image_url, description) VALUES (?, ?, ?, ?)',
+        [nom, prenom, image_url, description],
+        (err, results) => {
+            if (err) throw err;
+            res.redirect('/admin/add-event');
+        }
+    );
+});
+
+// Route pour ajouter un programme
+router.post('/add-program', (req, res) => {
+    const { evenement_id, titre, description } = req.body;
+
+    // Insertion du programme dans la base de données
+    db.query(
+        'INSERT INTO Programmes (evenement_id, titre, description) VALUES (?, ?, ?)',
+        [evenement_id, titre, description],
+        (err, results) => {
+            if (err) throw err;
+            res.redirect('/admin/add-event');
+        }
+    );
+});
+
+// Route pour supprimer un événement
+router.post('/delete-event/:id', (req, res) => {
+    const eventId = req.params.id;
+
+    // Suppression de l'événement de la base de données
+    db.query('DELETE FROM Evenements WHERE id = ?', [eventId], (err, results) => {
+        if (err) throw err;
+        res.redirect('/admin/add-event');
+    });
 });
 
 module.exports = router;

@@ -7,67 +7,72 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const flash = require('connect-flash');
 const ensureAdmin = require('./middleware/ensureAdmin');
-const passportConfig = require('./passport-config'); // Ensure this path is correct
+const passportConfig = require('./passport-config');
+const db = require('./config/db');
 
 const app = express();
 
-// Set EJS as the template engine
+// Configurer EJS comme moteur de template
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Define the public directory for static files
-app.use(express.static(path.join(__dirname, '')));
+// Définir le répertoire public pour les fichiers statiques
+app.use(express.static(path.join(__dirname, ''))); // Répertoire public
 
-// Middleware to parse request bodies
+// Middleware pour parser les corps de requêtes
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(flash());
 
-// Session configuration
+// Configuration de la session
 app.use(session({
     secret: 'your-secret-key',
     resave: false,
     saveUninitialized: true
 }));
 
-// Initialize Passport and restore session
+// Initialiser Passport et restaurer la session
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Middleware to ensure admin
+// Middleware pour assurer l'accès admin
 app.use('/admin', ensureAdmin);
 
-// Multer configuration
+// Configuration de Multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images'); // Directory where images will be saved
+        cb(null, path.join(__dirname, 'public/images')); // Répertoire où les images seront sauvegardées
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
+        cb(null, Date.now() + path.extname(file.originalname)); // Nom de fichier unique
     }
 });
 const upload = multer({ storage: storage });
 
-// Route handlers
-const userRoutes = require('./routes/userRoutes');
+// Routes pour les différentes parties de l'application
 const adminRoutes = require('./routes/adminRoutes');
+const userRoutes = require('./routes/userRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const authRoutes = require('./routes/authRoutes');
 
-// Route usage
-app.use('/', userRoutes);
 app.use('/admin', adminRoutes);
 app.use('/events', eventRoutes);
 app.use('/inscription', authRoutes);
+app.use('/', userRoutes);
 
-// Other routes
+// Routes de base
 app.get('/', (req, res) => res.render('index', { user: req.user }));
 app.get('/index', (req, res) => res.render('index', { user: req.user }));
 app.get('/contact', (req, res) => res.render('contact', { user: req.user }));
 
-// Start the server
+// Gestion des erreurs
+app.use((req, res, next) => {
+    res.status(404).send('Page not found');
+});
+
+// Démarrer le serveur
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
