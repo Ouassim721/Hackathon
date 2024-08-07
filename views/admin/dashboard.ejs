@@ -10,56 +10,59 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-dark text-light">
     <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Tableau de Bord</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-light" href="#">Tableau de Bord</a>
     </header>
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse position-fixed" style="height: 100vh;">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse position-fixed" style="height: 100vh;">
                 <div class="position-sticky pt-3" style="height: 100%;">
                     <ul class="nav flex-column mt-3" style="height: 100%;">
                         <li class="nav-item py-2">
-                            <a class="nav-link" href="/admin/dashboard">Tableau de board</a>
+                            <a class="nav-link text-light active" href="/admin/dashboard">Tableau de bord</a>
                         </li>
                         <li class="nav-item py-2">
-                            <a class="nav-link" href="/admin/add-event">Gérer les Événements</a>
+                            <a class="nav-link text-light" href="/admin/add-event">Gérer les Événements</a>
                         </li>
                         <li class="nav-item py-2">
-                            <a class="nav-link" href="/admin/photos">Gérer les Photos</a>
+                            <a class="nav-link text-light" href="/admin/photos">Gérer les Photos</a>
                         </li>
                         <li class="nav-item py-2">
-                            <a class="nav-link" href="/admin/applications">Gérer les Applications</a>
+                            <a class="nav-link text-light" href="/admin/applications">Gérer les Applications</a>
                         </li>
                     </ul>
                 </div>
             </nav>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 my-4">
                 <h2>Tableau de Bord</h2>
                 <a href="/admin/add-event" class="btn btn-primary">Ajouter un Événement</a>
                 <h3 class="mt-5">Événements Existants</h3>
                 <ul class="list-group">
                     <% if (events.length > 0) { %>
                         <% events.forEach(event => { %>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
                                 <%= event.titre %> - <%= new Date(event.date).toLocaleDateString() %>
                                <!-- Formulaire de suppression -->
-                    <form action="/admin/delete-event/<%= event.id %>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
-                    </form>
+                               <form action="/admin/delete-event/<%= event.id %>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                            </form>
+                            
+                            
+                            
                             </li>
                         <% }) %>
                     <% } else { %>
-                        <li class="list-group-item">Aucun événement trouvé</li>
+                        <li class="list-group-item bg-dark text-light">Aucun événement trouvé</li>
                     <% } %>
                 </ul>
             </main>
             
         </div>
     </div>
-    <script src="/public/bootstrap-5.3.3-dist/js/bootstrap.js"></script>
+    <script src="/public/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <script src="/scripts/dashboard.js"></script>
 </body>
 </html>

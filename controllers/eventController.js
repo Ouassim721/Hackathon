@@ -109,8 +109,8 @@ exports.deleteEvent = async (req, res) => {
     const eventId = req.params.id;
 
     try {
-        // Récupérer l'URL de l'image pour pouvoir la supprimer du dossier
-        const [event] = await db.query('SELECT imageUrl FROM evenements WHERE id = ?', [eventId]);
+        // Récupérer l'URL de l'image pour la supprimer du dossier
+        const [event] = await db.query('SELECT imageUrl FROM Evenements WHERE id = ?', [eventId]);
         if (event.length > 0 && event[0].imageUrl) {
             const filePath = path.join(__dirname, '../public', event[0].imageUrl);
             if (fs.existsSync(filePath)) {
@@ -118,7 +118,7 @@ exports.deleteEvent = async (req, res) => {
             }
         }
 
-        await db.query('DELETE FROM evenements WHERE id = ?', [eventId]);
+        await db.query('DELETE FROM Evenements WHERE id = ?', [eventId]);
         res.redirect('/admin/dashboard');
     } catch (error) {
         console.error('Erreur lors de la suppression de l\'événement:', error);

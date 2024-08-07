@@ -79,7 +79,10 @@ body {
 }
 
 .nav-link:hover {
-  color: #dd6e42; /* Couleur au survol des liens */
+  color: #dd6e42 !important; /* Couleur au survol des liens */
+}
+.active{
+  color: #dd6e42 !important; /* Couleur au survol des liens */
 }
 
 /* Styles pour les cartes */

@@ -23,7 +23,7 @@
                             <a class="nav-link" href="/admin/dashboard">Tableau de bord</a>
                         </li>
                         <li class="nav-item py-2">
-                            <a class="nav-link" href="/admin/add-event">Gérer les Événements</a>
+                            <a class="nav-link active" href="/admin/add-event">Gérer les Événements</a>
                         </li>
                         <li class="nav-item py-2">
                             <a class="nav-link" href="/admin/photos">Gérer les Photos</a>
@@ -120,8 +120,9 @@
                             <%= event.titre %>
                             <form action="/admin/delete-event/<%= event.id %>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
                             </form>
+                            
                         </li>
                     <% }) %>
                 </ul>

@@ -17,4 +17,5 @@ router.post('/add-event', ensureAdmin, eventController.upload.fields([
     { name: 'image', maxCount: 1 } // Nom du champ pour l'image de l'événement
 ]), eventController.addEvent);
 
+
 module.exports = router;
