@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="/views/assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="/views/assets/css/test.css">
+    <link rel="stylesheet" href="/public/font-awesome/css/all.min.css">
    <style>
         .card-img-top {
             height: 180px;
@@ -78,11 +79,6 @@
                <div class="row" style="height: 100vh; background-image: url(/images/bg-eve.jpg); background-size: cover; ">
                   <div class="col-lg-6 ms-3">
                      <div class="banner-content-wrap">
-                        <div class="date-item wow fadeInUp m-2" data-wow-duration="1.5s" data-wow-delay="900ms">
-                              <span class="event-day">09</span>
-                              <span class="event-month">Aout</span> 
-                              <span class="event-year">2024</span>
-                        </div>
                         <h2 class="banner-title wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="700ms">
                               Créez<br>des relations
                         </h2>
@@ -101,18 +97,18 @@
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <!-- Image Section -->
-                        <img src="/images/<%= event.imageUrl || 'default.jpg' %>" alt="<%= event.titre %>" class="card-img-top">
+                        <img src="/public/<%= event.imageUrl || 'default.jpg' %>" alt="<%= event.titre %>" class="card-img-top">
                         <div class="card-body">
                             <!-- Event Name -->
-                            <h5 class="card-title"><%= event.titre %></h5>
+                            <h5 class="card-title fs-4"><%= event.titre %></h5>
                             <!-- Event Start and End Dates -->
-                            <p class="card-text"><strong>Date:</strong> <%= new Date(event.date_debut).toLocaleDateString() %> - <%= new Date(event.date_fin).toLocaleDateString() %></p>
+                            <p class="card-text"><strong><i class="fa-regular fa-calendar fs-5 me-2 my-3"></i></strong> <%= new Date(event.date_debut).toLocaleDateString() %> - <%= new Date(event.date_fin).toLocaleDateString() %></p>
                             <!-- Event Description -->
-                            <p class="card-text"><%= event.description %></p>
+                            <!-- <p class="card-text"><%= event.description %></p> -->
                             <!-- Location -->
-                            <p class="card-text"><strong>Location:</strong> <%= event.lieu %></p>
+                            <p class="card-text"><strong><i class="fa-solid fa-map-pin fs-5 me-2"></i></strong> <%= event.lieu %></p>
                             <!-- View Details Button -->
-                            <a href="/events/event-details/<%= event.id %>" class="btn btn-warning">Voir les détails</a>
+                            <a href="/events/event-details/<%= event.id %>" class="btn btn-warning mt-3">Voir les détails</a>
                         </div>
                     </div>
                 </div>

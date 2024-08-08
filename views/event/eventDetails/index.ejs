@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="/views/assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="/views/assets/css/test.css">
-    <link rel="stylesheet" href="/public/carousel.css">
+    <link rel="stylesheet" href="/public/font-awesome/css/all.min.css">
    <style>
         .card-img-top {
             height: 180px;
@@ -76,11 +76,11 @@
       <section class="hero-area banner-6 banner-6-alt" style="height: 100vh;">
          <div class="banner-item">
             <div class="container-fluid" >
-               <div class="row" style="height: 100vh; background-image: url(/images/bg-eve.jpg); background-size: cover; ">
+               <div class="row" style="height: 100vh; background-image: url(/images/ticket-2974645_1280.jpg); background-size: cover; background-position: center;">
                   <div class="col-lg-6 ms-3">
                      <div class="banner-content-wrap">
-                        <h2 class="banner-title wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="700ms">
-                            <%= event.titre %>
+                        <h2 class="banner-title wow fadeInUp text-center" data-wow-duration="1.5s" data-wow-delay="700ms" style="text-transform: uppercase; color: #fefefe; font-style: italic;">
+                            BIENVENUE <br>DANS <br><span class="text-light"><%= event.titre %></span>
                         </h2>
                      </div>
                      <!-- Banner content wrap end -->
@@ -106,75 +106,88 @@
     
       
         <!-- Event Title and Description -->
-        <div class="row featurette">
+        <div class="row featurette" style="margin-top: 100px; padding: 30px;">
             <div class="col-md-7">
-                <h2 class="featurette-heading fw-normal lh-1"><%= event.titre %></h2>
-                <p class="lead" style="margin-top: 75px;"><%= event.description %></p>
+                <h2 class="fw-bold lh-1 m-3 fs-1" style="text-transform: capitalize;"><%= event.titre %></h2>
+                <p class="lead m-5"><%= event.description %></p>
             </div>
             <div class="col-md-5">
-                <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="var(--bs-secondary-bg)" />
-                    <text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
-                </svg>
+                <img src="/public/<%= event.imageUrl || 'default.jpg' %>" alt="<%= event.titre %>" width="auto" height="auto" style="box-shadow: 5px 5px 10px gray;">
             </div>
         </div>
     
         <!-- Event Details -->
-        <p><strong>Date de début :</strong> <%= event.date_debut %></p>
-        <p><strong>Date de fin :</strong> <%= event.date_fin %></p>
-        <p><strong>Lieu :</strong> <%= event.lieu %></p>
+        
+        
+        
+        <div class="container my-5 d-flex flex-column align-items-center justify-content-between p-4" style="box-shadow: 5px 5px 20px gray;">
+          <div class="row m-4">
+              <h4><strong class="text-dark ">Début :</strong> <%= event.date_debut %></h4>
+            </div>
+          <div class="row m-4">
+            <i class="fa-solid fa-arrow-down fs-1"></i>
+            </div>
+          <div class="row m-4">
+            <h4><strong class="text-dark">Fin :</strong> <%= event.date_fin %></h4>
+          </div>
+          </div>
+        </div>
+        <h3 class="fs-1 m-3" style="letter-spacing: 1px;">Lieu .</h3>
+        <div id="lieu">
+          <div class="section-title">
+            <p><%= event.lieu %></p>
+          </div>
+        </div>
     
         <!-- Sponsors Section -->
-        <h2 class="mt-5">Sponsors</h2>
-        <div class="row">
-            <% sponsors.forEach(sponsor => { %>
-            <div class="col-lg-4 text-center mb-4">
-                <img src="/images/bg-2.jpeg" alt="<%= sponsor.nom %>" style="width: 140px; height: 140px; border-radius: 50%;">
-                <h2 class="fw-normal mt-3"><%= sponsor.nom %></h2>
-                <p><%= sponsor.description %></p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-            </div>
-            <% }) %>
-        </div>
-    
+        
         <!-- Speakers Section -->
-        <h2 class="mt-5">Speakers</h2>
-        <div class="row">
-            <% speakers.forEach(speaker => { %>
-            <div class="col-lg-4 text-center mb-4">
+        <h2 class="fs-1 mx-4 my-5" style="letter-spacing: 1px;">Speakers</h2>
+        <div class="row mt-4">
+          <% speakers.forEach(speaker => { %>
+            <div class="col-lg-4 text-center mb-4 d-flex flex-column align-items-center justify-content-center py-5">
                 <% if (speaker.image_url) { %>
-                <img src="<%= speaker.image_url %>" alt="<%= speaker.nom %> <%= speaker.prenom %>" style="width: 140px; height: 140px; border-radius: 50%;">
+                <!-- <img src="/public/images/default-speaker.jpg" alt="<%= speaker.nom %> <%= speaker.prenom %>"class="cover"> -->
+                 <div class="cover" style="background-image: url(/public/images/default-speaker.jpg);"></div>
                 <% } else { %>
-                <img src="/images/default-speaker.png" alt="<%= speaker.nom %> <%= speaker.prenom %>" style="width: 140px; height: 140px; border-radius: 50%;">
+                <!-- <img src="/public/images/default-speaker.jpg" alt="<%= speaker.nom %> <%= speaker.prenom %>" style="width: 140px; height: 140px; border-radius: 50%;"> -->
+                <div class="cover" style="background-image: url(/public/images/default-speaker.jpg);"></div>
                 <% } %>
-                <h2 class="fw-normal mt-3"><%= speaker.nom %> <%= speaker.prenom %></h2>
+                <h2 class="fw-normal mt-3" style="text-transform: capitalize;"><%= speaker.nom %> <%= speaker.prenom %></h2>
                 <p><%= speaker.description %></p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
             </div>
             <% }) %>
         </div>
-    
+        
         <!-- Programme Section -->
-        <h2 class="mt-5">Programme</h2>
-        <div class="row">
-            <% programmes.forEach(programme => { %>
-            <div class="col-md-6">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><strong>Date:</strong> <%= programme.titre %></h5>
-                        <p class="card-text"><%= programme.description %></p>
-                    </div>
+        <h2 class="fs-1 mx-4 my-5" style="letter-spacing: 1px;">Programme</h2>
+        <div class="row d-flex justify-content-center" style="height: 400px;">
+          <% programmes.forEach(programme => { %>
+            <div class="col-md-6" style="width: 70%; height: 100%; ">
+              <div class="card mb-4" style="height: 100%; border: none; background-color: #eaeaea;">
+                <div class="card-body">
+                  <h5 class="card-title fs-2 text-center my-3"><%= programme.titre %></h5>
+                  <p class="card-text fs-4 text-center my-3"><%= programme.description %></p>
                 </div>
+              </div>
             </div>
             <% }) %>
-        </div>
-    
-        <!-- Apply Button -->
-        <div class="d-flex justify-content-center mt-4">
+          </div>
+          <h2 class="fs-1 mx-4 my-5 border" style="letter-spacing: 1px;">Sponsors</h2>
+          <div class="row" id="sponsors">
+              <% sponsors.forEach(sponsor => { %>
+              <div class="col-lg-4 text-center mb-4">
+                  <h2 class="mt-3 fw-bold  fs-1"><%= sponsor.nom %></h2>
+                  <!-- <p><%= sponsor.description %></p> -->
+              </div>
+              <% }) %>
+          </div>
+          
+          <!-- Apply Button -->
+          <div class="d-flex justify-content-center mt-4">
           <form action="/events/apply" method="POST">
             <input type="hidden" name="eventId" value="<%= event.id %>">
-            <button type="submit" class="btn btn-primary">Demander Candidature</button>
+            <button type="submit" class="btn btn-primary p-4 fs-5 my-5" style="letter-spacing: 1px;">Demander Candidature</button>
         </form>
         
       </div>

@@ -25,12 +25,6 @@
                         <li class="nav-item py-2">
                             <a class="nav-link active" href="/admin/add-event">Gérer les Événements</a>
                         </li>
-                        <li class="nav-item py-2">
-                            <a class="nav-link" href="/admin/photos">Gérer les Photos</a>
-                        </li>
-                        <li class="nav-item py-2">
-                            <a class="nav-link" href="/admin/applications">Gérer les Applications</a>
-                        </li>
                     </ul>
                 </div>
             </nav>
@@ -54,19 +48,19 @@
                                 </div>
                                 <div class="mb-3" id="date-event-1">
                                     <label for="dateDebut" class="form-label">Date de début</label>
-                                    <input type="date" class="form-control" id="dateDebut" name="date_debut" required>
+                                    <input type="date" class="form-control" id="date" name="date_debut" required>
                                   </div>
                                   <div class="mb-3" id="date-event-2">
                                     <label for="dateFin" class="form-label">Date de fin</label>
-                                    <input type="date" class="form-control" id="dateFin" name="date_fin" required>
+                                    <input type="date" class="form-control" id="date" name="date_fin" required>
                                   </div>
                                 <div class="mb-3" id="lieu-event">
                                     <label for="lieu" class="form-label">Lieu</label>
                                     <input type="text" class="form-control" id="lieu" name="lieu" required>
                                 </div>
                                 <div class="mb-3" id="image-event">
-                                    <label for="image" class="form-label">Image</label>
-                                    <input type="file" class="form-control" id="image" name="image">
+                                    <label for="eventImage" class="form-label">Image</label>
+                                    <input type="file" name="eventImage" class="form-control" id="eventImage" accept="image/*">
                                 </div>
                             </div>
                                 <!-- Sponsor Section -->
@@ -129,6 +123,18 @@
             </main>
         </div>
     </div>
+    <script>
+        document.getElementById('date').addEventListener('change', function() {
+            const dateInput = this.value;
+            if (dateInput) {
+                const date = new Date(dateInput);
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Les mois commencent à 0
+                const year = date.getFullYear();
+                document.getElementById('formattedDate').value = `${day}/${month}/${year}`;
+            }
+        });
+    </script>
     <script src="/public/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <script src="/scripts/dashboard.js"></script>
 </body>

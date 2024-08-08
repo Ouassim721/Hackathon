@@ -29,9 +29,10 @@ router.get('/dashboard', ensureAdmin, async (req, res) => {
 router.get('/add-event', ensureAdmin, eventController.getAddEventForm);
 
 // Route to add an event
-router.post('/add-event', ensureAdmin, eventController.upload.fields([
-    { name: 'image', maxCount: 1 }
-]), eventController.addEvent);
+// router.post('/add-event', ensureAdmin, eventController.upload.fields([
+//     { name: 'image', maxCount: 1 }
+// ]), eventController.addEvent);
+router.post('/add-event', ensureAdmin, eventController.upload, eventController.addEvent);
 
 // Route to delete an event
 router.post('/delete-event/:id', ensureAdmin, eventController.deleteEvent);

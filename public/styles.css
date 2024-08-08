@@ -222,3 +222,35 @@ footer {
   .footer-section ul li a:hover {
     color: #A9B388;
   }
+  #lieu{
+    height: 500px;
+    width: 100%;
+    background-image: url(/images/map.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #lieu .section-title p{
+    margin-top: 20px;
+    font-size: 70px;
+    color: #fefefe;
+  }
+  #sponsors{
+    width: 100%;
+    height: 300px;
+    background-color: #e8dab2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  div.cover {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="mb-3">
                         <label for="speakerImage" class="form-label">Image</label>
-                        <input type="file" class="form-control" name="speakerImage">
+                        <input type="file" class="form-control" name="speakerImage" accept="image/*">
                     </div>
                 </div>
             </div>
