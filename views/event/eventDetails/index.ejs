@@ -92,6 +92,19 @@
       </section>
       <!-- banner end-->
       <section class="container mt-5">
+          <% if (messages.success_msg) { %>
+              <div class="alert alert-success">
+                  <%= messages.success_msg %>
+              </div>
+          <% } %>
+      
+          <% if (messages.error_msg) { %>
+              <div class="alert alert-danger">
+                  <%= messages.error_msg %>
+              </div>
+          <% } %>
+    
+      
         <!-- Event Title and Description -->
         <div class="row featurette">
             <div class="col-md-7">
@@ -159,8 +172,13 @@
     
         <!-- Apply Button -->
         <div class="d-flex justify-content-center mt-4">
-            <button class="btn btn-primary">Demander Condidature</button>
-        </div>
+          <form action="/events/apply" method="POST">
+            <input type="hidden" name="eventId" value="<%= event.id %>">
+            <button type="submit" class="btn btn-primary">Demander Candidature</button>
+        </form>
+        
+      </div>
+      
     </section>  
     
             <!-- footer start-->

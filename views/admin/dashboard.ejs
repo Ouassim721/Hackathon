@@ -34,7 +34,6 @@
                     </ul>
                 </div>
             </nav>
-
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 my-4">
                 <h2>Tableau de Bord</h2>
                 <a href="/admin/add-event" class="btn btn-primary">Ajouter un Événement</a>
@@ -44,23 +43,56 @@
                         <% events.forEach(event => { %>
                             <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
                                 <%= event.titre %> - <%= new Date(event.date).toLocaleDateString() %>
-                               <!-- Formulaire de suppression -->
-                               <form action="/admin/delete-event/<%= event.id %>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
-                            </form>
-                            
-                            
-                            
+                                <form action="/admin/delete-event/<%= event.id %>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                </form>
                             </li>
                         <% }) %>
                     <% } else { %>
                         <li class="list-group-item bg-dark text-light">Aucun événement trouvé</li>
                     <% } %>
                 </ul>
+                <div class="container mt-5">
+                    <h1>Liste des candidatures</h1>
+                    <table class="table table-custom">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom de l'utilisateur</th>
+                                <th>Nom de l'événement</th>
+                                <th>Date de candidature</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (candidatures && candidatures.length) { %>
+                                <% candidatures.forEach(function(candidature) { %>
+                                    <tr>
+                                        <td><%= candidature.id %></td>
+                                        <td><%= candidature.utilisateur_nom %></td>
+                                        <td><%= candidature.evenement_titre %></td>
+                                        <td><%= candidature.date_candidature %></td>
+                                        <td class="btn-actions">
+                                            <form action="/candidature/<%= candidature.id %>/accepter" method="post">
+                                                <button type="submit" class="btn btn-success btn-sm">Accepter</button>
+                                            </form>
+                                            <form action="/candidature/<%= candidature.id %>/refuser" method="post">
+                                                <button type="submit" class="btn btn-danger btn-sm">Refuser</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="5">Aucune candidature en attente.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                
             </main>
-            
-        </div>
     </div>
     <script src="/public/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <script src="/scripts/dashboard.js"></script>

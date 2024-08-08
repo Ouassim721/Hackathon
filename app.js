@@ -9,11 +9,11 @@ const flash = require('connect-flash');
 const ensureAdmin = require('./middleware/ensureAdmin');
 const passportConfig = require('./passport-config');
 const db = require('./config/db');
-
+const candidatureRoutes = require('./routes/candidatureRoutes');
 const app = express();
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
-
+require('dotenv').config();
 // Configurer EJS comme moteur de template
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -52,6 +52,7 @@ app.use('/admin', adminRoutes);
 app.use('/events', eventRoutes);
 app.use('/inscription', authRoutes);
 app.use('/', userRoutes);
+app.use('/candidature', candidatureRoutes);
 
 // Routes de base
 app.get('/', (req, res) => res.render('index', { user: req.user }));

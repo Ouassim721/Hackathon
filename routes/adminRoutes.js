@@ -1,31 +1,39 @@
-// adminRoutes.js
 const express = require('express');
 const router = express.Router();
 const ensureAdmin = require('../middleware/ensureAdmin');
 const eventController = require('../controllers/eventController');
 const db = require('../config/db');
 
-
-// Route pour afficher le tableau de bord
 router.get('/dashboard', ensureAdmin, async (req, res) => {
     try {
-        const [events] = await db.query('SELECT * FROM Evenements');
-        res.render('admin/dashboard', { events });
+        // Fetch both events and candidatures
+        const [events] = await db.query('SELECT * FROM evenements');
+        const [candidatures] = await db.query(`
+            SELECT c.id, u.nom AS utilisateur_nom, e.titre AS evenement_titre, c.date_candidature 
+            FROM candidatures c
+            JOIN users u ON c.utilisateur_id = u.id
+            JOIN evenements e ON c.evenement_id = e.id
+            WHERE c.status = 'en_attente'
+        `);
+
+        res.render('admin/dashboard', { events, candidatures });
     } catch (error) {
-        console.error('Erreur lors de la récupération des événements:', error);
-        res.status(500).send('Erreur du serveur');
+        console.error('Error fetching data for dashboard:', error);
+        res.status(500).send('Server error');
     }
 });
 
-// Route pour afficher le formulaire d'ajout d'événements
+
+
+// Route to display the add event form
 router.get('/add-event', ensureAdmin, eventController.getAddEventForm);
 
-// Route pour ajouter un événement
+// Route to add an event
 router.post('/add-event', ensureAdmin, eventController.upload.fields([
     { name: 'image', maxCount: 1 }
 ]), eventController.addEvent);
 
-// Route pour supprimer un événement
+// Route to delete an event
 router.post('/delete-event/:id', ensureAdmin, eventController.deleteEvent);
 
 module.exports = router;

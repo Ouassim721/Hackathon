@@ -13,6 +13,51 @@ body {
 /*
  * Sidebar
  */
+/* Assurez-vous que Bootstrap est déjà chargé dans votre projet */
+
+.table-custom {
+  /* Ajoute un espacement autour de la table */
+  margin: 20px 0;
+}
+
+.table-custom th,
+.table-custom td {
+  /* Ajoute du padding pour une meilleure lisibilité */
+  padding: 12px;
+  text-align: left;
+}
+
+.table-custom thead th {
+  /* Ajoute un fond et une couleur de texte pour les en-têtes de table */
+  background-color: #343a40; /* Couleur sombre pour correspondre au thème Bootstrap Dark */
+  color: #ffffff; /* Couleur du texte blanc */
+}
+
+.table-custom tbody tr:nth-child(odd) {
+  /* Ajoute une couleur de fond alternée pour les lignes */
+  background-color: #f8f9fa; /* Couleur de fond très clair pour les lignes impaires */
+}
+
+.table-custom tbody tr:nth-child(even) {
+  background-color: #ffffff; /* Couleur de fond blanche pour les lignes paires */
+}
+
+.table-custom tbody tr:hover {
+  /* Ajoute un effet de survol pour les lignes de la table */
+  background-color: #e9ecef; /* Couleur légèrement grise pour le survol */
+}
+
+.table-custom .btn-actions {
+  /* Ajoute des styles pour les boutons d'action */
+  display: flex;
+  gap: 5px;
+}
+
+.table-custom .btn-actions button {
+  /* Styles pour les boutons d'action */
+  padding: 5px 10px;
+  font-size: 0.875rem; /* Taille de police plus petite pour les boutons */
+}
 
 @media (min-width: 768px) {
   .sidebar .offcanvas-lg {

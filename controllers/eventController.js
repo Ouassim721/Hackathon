@@ -3,81 +3,80 @@ const path = require('path');
 const fs = require('fs');
 const db = require('../config/db');
 
-// Configuration de multer pour le téléchargement des fichiers
+// Multer configuration for file uploads
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../public/images')); // Répertoire où les fichiers seront sauvegardés
+        cb(null, path.join(__dirname, '../public/images')); // Directory to save files
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname)); // Nom de fichier unique
+        cb(null, Date.now() + path.extname(file.originalname)); // Unique file name
     }
 });
 const upload = multer({ storage: storage });
 
-// Middleware pour gérer les fichiers téléchargés
+// Middleware for handling file uploads
 exports.upload = upload;
 
-// Fonction pour récupérer tous les événements
+// Function to get all events
 exports.getEvents = async (req, res) => {
     try {
-        const [events] = await db.query('SELECT * FROM evenements');
+        const [events] = await db.query('SELECT * FROM Evenements');
         res.render('event/events', { events });
     } catch (err) {
-        console.error('Erreur lors de la récupération des événements:', err);
-        res.status(500).send('Erreur du serveur');
+        console.error('Error fetching events:', err);
+        res.status(500).send('Server error');
     }
 };
 
-// Fonction pour afficher le formulaire d'ajout d'événement
+// Function to display add event form
 exports.getAddEventForm = async (req, res) => {
     try {
-        // Récupère tous les événements existants
-        const [events] = await db.query('SELECT * FROM evenements');
-        // Rendu de la vue avec la liste des événements
+        // Fetch existing events
+        const [events] = await db.query('SELECT * FROM Evenements');
+        // Render the view with the list of events
         res.render('admin/add-event', { events });
     } catch (err) {
-        console.error('Erreur lors de l\'affichage du formulaire d\'ajout d\'événement:', err);
-        res.status(500).send('Erreur du serveur');
+        console.error('Error displaying add event form:', err);
+        res.status(500).send('Server error');
     }
 };
 
-// Fonction pour ajouter un événement
+// Function to add an event
 exports.addEvent = async (req, res) => {
     const { titre, description, date_debut, date_fin, lieu } = req.body;
-    const eventImage = req.file ? '/images/' + req.file.filename : null; // Assurez-vous d'utiliser req.file pour un seul fichier
+    const eventImage = req.file ? '/images/' + req.file.filename : null;
     const sponsorsData = JSON.parse(req.body.sponsorsData || '[]');
     const speakersData = JSON.parse(req.body.speakersData || '[]');
     const programmeDaysData = JSON.parse(req.body.programDaysData || '[]');
 
     try {
-        // Insertion de l'événement
-        const sqlEvent = 'INSERT INTO evenements (titre, description, date_debut, date_fin, lieu, imageUrl) VALUES (?, ?, ?, ?, ?, ?)';
+        // Insert event
+        const sqlEvent = 'INSERT INTO Evenements (titre, description, date_debut, date_fin, lieu, imageUrl) VALUES (?, ?, ?, ?, ?, ?)';
         const [eventResult] = await db.query(sqlEvent, [titre, description, date_debut, date_fin, lieu, eventImage]);
         const eventId = eventResult.insertId;
 
-        // Insertion des sponsors
+        // Insert sponsors
         for (const sponsor of sponsorsData) {
-            await db.query('INSERT INTO sponsors (evenement_id, nom, description) VALUES (?, ?, ?)', [eventId, sponsor.name, sponsor.description]);
+            await db.query('INSERT INTO Sponsors (evenement_id, nom, description) VALUES (?, ?, ?)', [eventId, sponsor.name, sponsor.description]);
         }
 
-        // Insertion des speakers
+        // Insert speakers
         for (const speaker of speakersData) {
-            await db.query('INSERT INTO speakers (evenement_id, nom, prenom, image_url, description) VALUES (?, ?, ?, ?, ?)', [eventId, speaker.name, speaker.surname, speaker.image, speaker.description]);
+            await db.query('INSERT INTO Speakers (evenement_id, nom, prenom, imageUrl, description) VALUES (?, ?, ?, ?, ?)', [eventId, speaker.name, speaker.surname, speaker.image, speaker.description]);
         }
 
-        // Insertion des programmes
+        // Insert programmes
         for (const day of programmeDaysData) {
-            await db.query('INSERT INTO programmes (evenement_id, titre, description) VALUES (?, ?, ?)', [eventId, day.date, day.description]);
+            await db.query('INSERT INTO Programmes (evenement_id, titre, description) VALUES (?, ?, ?)', [eventId, day.date, day.description]);
         }
 
         res.redirect('/admin/dashboard');
     } catch (error) {
-        console.error('Erreur lors de l\'ajout de l\'événement:', error);
-        res.status(500).send('Erreur du serveur');
+        console.error('Error adding event:', error);
+        res.status(500).send('Server error');
     }
 };
 
-// Fonction pour obtenir les détails d'un événement spécifique
 exports.getEventDetails = async (req, res) => {
     const eventId = req.params.id;
 
@@ -96,20 +95,28 @@ exports.getEventDetails = async (req, res) => {
         const [speakers] = await db.query('SELECT * FROM speakers WHERE evenement_id = ?', [eventId]);
         const [programmes] = await db.query('SELECT * FROM programmes WHERE evenement_id = ?', [eventId]);
 
-        // Rendu de la page avec les détails de l'événement
-        res.render('event/eventDetails/index', { event: event[0], sponsors, speakers, programmes, user });
+        // Passer les messages de flash au rendu de la vue
+        res.render('event/eventDetails/index', { 
+            event: event[0], 
+            sponsors, 
+            speakers, 
+            programmes, 
+            user, 
+            messages: req.flash() // Passe les messages de flash à la vue
+        });
     } catch (error) {
         console.error('Erreur lors de la récupération des détails de l\'événement:', error);
         res.status(500).send('Erreur du serveur');
     }
 };
 
-// Fonction pour supprimer un événement
+
+// Function to delete an event
 exports.deleteEvent = async (req, res) => {
     const eventId = req.params.id;
 
     try {
-        // Récupérer l'URL de l'image pour la supprimer du dossier
+        // Fetch image URL to delete from the file system
         const [event] = await db.query('SELECT imageUrl FROM Evenements WHERE id = ?', [eventId]);
         if (event.length > 0 && event[0].imageUrl) {
             const filePath = path.join(__dirname, '../public', event[0].imageUrl);
@@ -121,7 +128,7 @@ exports.deleteEvent = async (req, res) => {
         await db.query('DELETE FROM Evenements WHERE id = ?', [eventId]);
         res.redirect('/admin/dashboard');
     } catch (error) {
-        console.error('Erreur lors de la suppression de l\'événement:', error);
-        res.status(500).send('Erreur du serveur');
+        console.error('Error deleting event:', error);
+        res.status(500).send('Server error');
     }
 };
