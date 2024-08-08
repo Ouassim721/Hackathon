@@ -58,6 +58,21 @@ app.get('/', (req, res) => res.render('index', { user: req.user }));
 app.get('/index', (req, res) => res.render('index', { user: req.user }));
 app.get('/contact', (req, res) => res.render('contact', { user: req.user }));
 
+// Route pour afficher actualites.ejs
+app.get('/actualites', (req, res) => {
+    // Remplacez ceci par la logique réelle pour obtenir les données de l'utilisateur
+    const user = req.user || null; // Assurez-vous que `req.user` est défini, sinon définissez-le comme `null`
+
+    res.render('actualites', { user }); // Passez `user` comme une variable à la vue
+});
+// Route pour afficher apropos.ejs
+app.get('/apropos', (req, res) => {
+    // Remplacez ceci par la logique réelle pour obtenir les données de l'utilisateur
+    const user = req.user || null; // Assurez-vous que `req.user` est défini, sinon définissez-le comme `null`
+
+    res.render('apropos', { user }); // Passez `user` comme une variable à la vue
+});
+
 // Gestion des erreurs
 app.use((req, res, next) => {
     res.status(404).send('Page not found');

@@ -27,31 +27,49 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif !important;
     background-color: var(--bg-color);
     color: var(--text-color);
 }
 /* Default navbar style */
 #navbar {
-    background-color: transparent; /* Or any other color */
-    transition: background-color 0.3s ease; /* Smooth transition */
+  background-color: transparent; /* Or any other color */
+  transition: background-color 0.3s ease; /* Smooth transition */
 }
+
 /* Navbar style after scrolling */
-#navbar.scrolled , #navbar.show {
-    background-color: #eaeaea;
-    color: var(--text-color);
-    border-bottom: 1px solid #bbb;
+#navbar.scrolled {
+  background-color: #eaeaea !important;
+  color: var(--text-color);
+  border-bottom: 1px solid #bbb;
 }
-#navbar.scrolled .nav-link , #navbar.show .nav-link{
-    color: var(--text-color);
-    transition: 0.2s;
+
+/* Navbar style when menu is expanded */
+#navbar.show {
+  background-color: #eaeaea !important;
+  color: var(--text-color);
+  border-bottom: 1px solid #bbb;
 }
-#navbar.scrolled .nav-link:hover ,#navbar.show .nav-link:hover{
-    color: var(--primary-color);
+
+/* Link styles after scrolling */
+#navbar.scrolled .nav-link,
+#navbar.show .nav-link {
+  color: var(--text-color);
+  transition: 0.2s;
 }
-#navbar.scrolled .active ,#navbar.show .active{
-    color: var(--primary-color);
+
+/* Link hover styles after scrolling */
+#navbar.scrolled .nav-link:hover,
+#navbar.show .nav-link:hover {
+  color: var(--primary-color);
 }
+
+/* Active link styles after scrolling */
+#navbar.scrolled .active,
+#navbar.show .active {
+  color: var(--primary-color);
+}
+
 
 bd-placeholder-img {
     font-size: 1.125rem;

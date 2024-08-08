@@ -1,0 +1,95 @@
+/* Style général du footer */
+footer {
+    background: linear-gradient(135deg, #c0d6df, #4f6d7a); /* Dégradé pour un effet moderne */
+    color: #f7fafc; /* Couleur du texte en contraste avec l'arrière-plan */
+    padding: 40px 20px; /* Espacement autour du contenu */
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Style des sections */
+  .footer-content div {
+    flex: 1;
+    margin: 10px;
+  }
+  
+  .footer-partners img {
+    width: 50px;
+    height: 50px;
+    max-width: 150px; /* Limite la taille des logos */
+    margin: 5px;
+    transition: transform 0.3s ease; /* Animation pour les logos */
+  }
+  
+  .footer-partners img:hover {
+    transform: scale(1.1); /* Zoom au survol */
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-links ul li {
+    margin: 10px 0;
+  }
+  
+  .footer-links a {
+    color: #edf2f7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: #dd6e42; /* Couleur de survol */
+  }
+  
+  .footer-reglement a,
+  .footer-mentions a {
+    color: #edf2f7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-reglement a:hover,
+  .footer-mentions a:hover {
+    color: #dd6e42; /* Couleur de survol */
+  }
+  
+  .footer-copyright {
+    margin-top: 20px;
+    font-size: 0.9em;
+  }
+  
+  .footer-contact {
+    margin-top: 20px;
+  }
+  
+  /* Style pour les petites écrans */
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+    }
+  
+    .footer-content div {
+      margin: 10px 0;
+    }
+  }
+
+  .h4{
+    font-size: 18px;
+    color: black;
+  }
+  .a{
+    font-size: 13px;
+  }
+
+  

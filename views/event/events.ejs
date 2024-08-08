@@ -24,6 +24,12 @@
    <!-- Responsive styles-->
    <link rel="stylesheet" href="/views/event/css/responsive.css">
    <link rel="stylesheet" href="/public/styles.css">
+   <link rel="stylesheet" href="/views/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/views/assets/css/templatemo-villa-agency.css">
+    <link rel="stylesheet" href="/views/assets/css/owl.css">
+    <link rel="stylesheet" href="/views/assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/views/assets/css/test.css">
    <style>
         .card-img-top {
             height: 180px;
@@ -35,55 +41,36 @@
    <div class="body-inner">
       <!-- NAVBAR start  -->
       <nav class="navbar navbar-expand-lg navbar-dark position-fixed" id="navbar" style="width: 100%; z-index: 999; top: 0;">
-            <div class="container-fluid">
-                <a class="navbar-brand d-flex justify-content-between align-items-center" href="#">
-                    <img id="logo" src="/images/logo2.png" alt="Logo du site" width="80" height="80" class="d-inline align-top mx-5">
-                    <!-- <h1 class="f">Al Moutmir</h1> -->
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/index">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/actualite">Actualité</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/evenement">Evenement</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/a-propos">A Propos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex flex-column flex-lg-row align-items-start" id="cnx-theme">
-                        <button type="button" class="btn btn-warning py-2 me-2 mb-2 mb-lg-0" id="navigateButton">Déconnexion</button>
-                        <div class="dropdown">
-                            <button class="btn btn-dark dropdown-toggle" type="button" id="themeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Theme
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="themeDropdown">
-                                <li>
-                                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="#" id="lightMode">
-                                        <span>Light Mode</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="#" id="darkMode">
-                                        <span>Dark Mode</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex justify-content-between align-items-center" href="#">
+                <img id="logo" src="/images/logo2.png" alt="Logo du site" width="80" height="80" class="d-inline align-top mx-5">
+                <!-- <h1 class="f">Al Moutmir</h1> -->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/index">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/actualites">Actualité</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/events">Evenement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/apropos">A Propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+
             </div>
-        </nav>
+        </div>
+    </nav>
       <!-- banner start-->
       <section class="hero-area banner-6 banner-6-alt" style="height: 100vh;">
          <div class="banner-item">
@@ -133,59 +120,73 @@
         </div>
     </div> 
             <!-- footer start-->
-            <footer class="ts-footer">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-lg-8 mx-auto">
-                        <div class="ts-footer-social text-center mb-30">
-                           <ul>
-                              <li>
-                                 <a href="#"><i class="fa fa-facebook"></i></a>
-                              </li>
-                              <li>
-                                 <a href="#"><i class="fa fa-twitter"></i></a>
-                              </li>
-                              <li>
-                                 <a href="#"><i class="fa fa-google-plus"></i></a>
-                              </li>
-                              <li>
-                                 <a href="#"><i class="fa fa-linkedin"></i></a>
-                              </li>
-                              <li>
-                                 <a href="#"><i class="fa fa-instagram"></i></a>
-                              </li>
-                           </ul>
-                        </div>
-                        <!-- footer social end-->
-                        <div class="footer-menu text-center mb-25">
-                           <ul>
-                              <li><a href="#">About Eventime</a></li>
-                              <li><a href="#">Blog</a></li>
-                              <li><a href="#">Contact</a></li>
-                              <li><a href="#">Tickets</a></li>
-                              <li><a href="#">Venue</a></li>
-                           </ul>
-                        </div><!-- footer menu end-->
-                        <div class="copyright-text text-center">
-                           <p>Copyright © 2019 Exhibz. All Rights Reserved.</p>
-                        </div>
-                     </div>
+            <footer>
+                <div class="footer-content">
+                  
+              
+                  <!-- Liens Utiles -->
+              
+                  <div class="footer-links">
+                    <h4 class="h4">Contact</h4>
+                    <ul>
+                      <li><p>Adresse : 123 Rue de l'Agriculture, 00000 Ville, Pays</p></li>
+                      <li><p>Email : <a href="mailto:contact@sam.ma" style="color: white;" class="a">contact@sam.ma</a></p></li>
+                      <li><p>Téléphone : +123 456 789</p></li>
+                    </ul>
                   </div>
-               </div>
-            </footer>
+                  
+                  <div class="footer-links">
+                    <h4 class="h4">Liens Utiles</h4>
+                    <ul>
+                      <li><a href="/politique-de-confidentialite" class="a">Politique de Confidentialité</a></li>
+                      <li><a href="/conditions-generales" class="a">Conditions Générales d'Utilisation</a></li>
+                      <li><a href="/aide" class="a">Aide / FAQ</a></li>
+                    </ul>
+                  </div>
+              
+                  <!-- Règlement Général -->
+                  <div class="footer-reglement">
+                    <h4 class="h4">Règlement Général</h4>
+                    <a href="/reglement-general" class="a">Consulter le Règlement Général</a>
+                  </div>
+              
+                  <!-- Mentions Légales -->
+                  <div class="footer-mentions">
+                    <h4 class="h4">Mentions Légales</h4>
+                    <a href="/mentions-legales" class="a">Voir les Mentions Légales</a>
+                  </div>
+                </div>
+              
+                
+              
+                <!-- Coordonnées de Contact -->
+                <!-- Partenaires -->
+                <div class="footer-partners">
+                  
+                  <a href="https://www.ocpgroup.ma/" target="_blank" class="a">
+                    <img src="/views/assets/images/logoocp.png" alt="Partenaire 1">
+                  </a>
+                  <a href="https://um6p.ma/" target="_blank" class="a">
+                    <img src="/views/assets/images/logoum6p.png" alt="Partenaire 2">
+                  </a>
+                  <a href="https://www.almoutmir.ma/index.php/fr" target="_blank" class="a">
+                    <img src="/views/assets/images/logo11.png" alt="Partenaire 2">
+                  </a>
+                  <!-- Ajoutez d'autres partenaires si nécessaire -->
+                </div>
+              <hr>
+                <!-- Copyright -->
+                <div class="footer-copyright">
+                  <p>&copy; 2024 Al Moutmir. Tous droits réservés.</p>
+                </div>
+              </footer>
             <!-- footer end-->
             <div class="BackTo">
                <a href="#" class="fa fa-angle-up" aria-hidden="true"></a>
             </div>
          </div>
          <!-- ts footer area end-->
-   
-   
-   
-   
-   
-         <!-- Javascript Files
-               ================================================== -->
+         <!-- Javascript Files-->
          <!-- initialize jQuery Library -->
          <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.js"></script>
    
@@ -210,7 +211,20 @@
          <script src="/views/event/js/script.js"></script>
          <!-- Template custom -->
          <script src="/views/event/js/main.js"></script>
-   
+         <script src="/scripts/script.js"></script>
+         <script>
+            document.getElementById('logoutButton')?.addEventListener('click', () => {
+                 window.location.href = '/inscription/logout';
+             });
+        
+             document.getElementById('loginButton')?.addEventListener('click', () => {
+                 window.location.href = '/inscription';
+             });
+        
+             document.getElementById('registerButton')?.addEventListener('click', () => {
+                 window.location.href = '/inscription';
+             });
+         </script>
       </div>
       <!-- Body inner end -->
    </body>
