@@ -148,10 +148,10 @@
             <div class="col-lg-4 text-center mb-4 d-flex flex-column align-items-center justify-content-center py-5">
                 <% if (speaker.image_url) { %>
                 <!-- <img src="/public/images/default-speaker.jpg" alt="<%= speaker.nom %> <%= speaker.prenom %>"class="cover"> -->
-                 <div class="cover" style="background-image: url(/public/images/default-speaker.jpg);"></div>
+                 <div class="cover" style="background-image: url('/public/<%= speaker.image_url %>');"></div>
                 <% } else { %>
-                <!-- <img src="/public/images/default-speaker.jpg" alt="<%= speaker.nom %> <%= speaker.prenom %>" style="width: 140px; height: 140px; border-radius: 50%;"> -->
-                <div class="cover" style="background-image: url(/public/images/default-speaker.jpg);"></div>
+                  
+                <div class="cover" style="background-image: url('/public/<%= speaker.image_url %>');"></div>
                 <% } %>
                 <h2 class="fw-normal mt-3" style="text-transform: capitalize;"><%= speaker.nom %> <%= speaker.prenom %></h2>
                 <p><%= speaker.description %></p>

@@ -10,18 +10,19 @@
     <title>Actualités</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/views/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-villa-agency.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="/views/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/views/assets/css/templatemo-villa-agency.css">
+    <link rel="stylesheet" href="/views/assets/css/owl.css">
+    <link rel="stylesheet" href="/views/assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="./assets/css/test.css">
-    <link rel="stylesheet" href="./assets/css/more.css">
+    <link rel="stylesheet" href="/views/assets/css/test.css">
+    <link rel="stylesheet" href="/views/assets/css/more.css">
     <link rel="stylesheet" href="/views/event/css/style.css">
+    <link rel="stylesheet" href="/public/styles.css">
 
 <!--
 
@@ -49,34 +50,44 @@ https://templatemo.com/tm-591-villa-agency
 
 
   <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
-                      <img src="./assets/images/logo-moutmir.png" style="height: 100px;width: 100px;padding: 10px;" alt="">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                        <li><a href="index.html" class="active">Acceuil</a></li>
-                        <li><a href="properties.html">A propos</a></li>
-                        <li><a href="actualites.html">Actualités</a></li>
-                        <li><a href="contact.html">Evénements</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="#"><i class="fa fa-calendar"></i> Se connecter</a></li>
-                    </ul>   
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark position-fixed" id="navbar" style="width: 100%; z-index: 999; top: 0;">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex justify-content-between align-items-center" href="#">
+            <img id="logo" src="/images/logo2.png" alt="Logo du site" width="80" height="80" class="d-inline align-top mx-5">
+            <!-- <h1 class="f">Al Moutmir</h1> -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/index">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/actualites">Actualité</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/events">Evenement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/apropos">A Propos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+            </ul>
+            <div class="d-flex flex-column flex-lg-row align-items-start" id="cnx-theme">
+              <% if (user) { %>
+                <button type="button" class="btn btn-warning py-2 me-2 mb-2 mb-lg-0" id="logoutButton">Deconnexion</button>
+            <% } else { %>
+              <button type="button" class="btn btn-warning py-2 me-2 mb-2 mb-lg-0" id="registerButton">Inscription</button>
+                <button type="button" class="btn btn-secondary py-2 me-2 mb-2 mb-lg-0" id="loginButton">Connexion</button>
+            <% } %>
             </div>
         </div>
     </div>
-  </header>
+</nav>
   <!-- ***** Header Area End ***** -->
 
   <div class="page-heading header-text">
@@ -96,7 +107,7 @@ https://templatemo.com/tm-591-villa-agency
       <div class="row">
         <div class="col-lg-8">
           <div class="main-image">
-            <img src="assets/images/image11.jpg" alt="">
+            <img src="/views/assets/images/image11.jpg" alt="">
           </div>
           <div class="main-content">
             <span class="category">Apparment</span>
@@ -156,13 +167,13 @@ https://templatemo.com/tm-591-villa-agency
     <div class="footer-partners">
       
       <a href="https://www.ocpgroup.ma/" target="_blank" class="a">
-        <img src="./assets/images/logoocp.png" alt="Partenaire 1">
+        <img src="/views/assets/images/logoocp.png" alt="Partenaire 1">
       </a>
       <a href="https://um6p.ma/" target="_blank" class="a">
-        <img src="./assets/images/logoum6p.png" alt="Partenaire 2">
+        <img src="/views/assets/images/logoum6p.png" alt="Partenaire 2">
       </a>
       <a href="https://www.almoutmir.ma/index.php/fr" target="_blank" class="a">
-        <img src="./assets/images/logo11.png" alt="Partenaire 2">
+        <img src="/views/assets/images/logo11.png" alt="Partenaire 2">
       </a>
       <!-- Ajoutez d'autres partenaires si nécessaire -->
     </div>
@@ -177,12 +188,12 @@ https://templatemo.com/tm-591-villa-agency
  </div>
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/counter.js"></script>
-  <script src="assets/js/custom.js"></script>
-
+  <script src="/views/vendor/jquery/jquery.min.js"></script>
+  <script src="/views/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/views/assets/js/isotope.min.js"></script>
+  <script src="/views/assets/js/owl-carousel.js"></script>
+  <script src="/views/assets/js/counter.js"></script>
+  <script src="/views/assets/js/custom.js"></script>
+  <script src="/scripts/script.js"></script>
   </body>
 </html>

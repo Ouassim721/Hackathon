@@ -1,0 +1,44 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+body{
+    background: linear-gradient(to right, #c0d6df, white); /* Dégradé de couleur */
+}
+
+/* .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.content {
+    text-align: center;
+} */
+
+h1 {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    margin: 0;
+    margin-top: 15%;
+    color: #dd6e42;
+    font-size: 50px;
+}
+
+p {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 0;
+    color: #4f6d7a;
+    font-size: 20px;
+}
+
+a{
+    display: flex;
+    justify-content: center;
+    list-style: none; 
+    text-decoration: none;
+    color: #4f6d7a;
+}

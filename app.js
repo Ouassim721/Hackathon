@@ -73,6 +73,20 @@ app.get('/apropos', (req, res) => {
 
     res.render('apropos', { user }); // Passez `user` comme une variable à la vue
 });
+// Route pour afficher apropos.ejs
+app.get('/more', (req, res) => {
+    // Remplacez ceci par la logique réelle pour obtenir les données de l'utilisateur
+    const user = req.user || null; // Assurez-vous que `req.user` est défini, sinon définissez-le comme `null`
+
+    res.render('more', { user }); // Passez `user` comme une variable à la vue
+});
+// Route pour afficher apropos.ejs
+app.get('/contact', (req, res) => {
+    // Remplacez ceci par la logique réelle pour obtenir les données de l'utilisateur
+    const user = req.user || null; // Assurez-vous que `req.user` est défini, sinon définissez-le comme `null`
+
+    res.render('contact', { user }); // Passez `user` comme une variable à la vue
+});
 
 // Gestion des erreurs
 app.use((req, res, next) => {
